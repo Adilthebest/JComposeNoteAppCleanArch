@@ -6,5 +6,4 @@ class GetAllNotesUseCase
     (private val noteRepository: NoteRepository)
 {
      operator fun invoke() = noteRepository.getNotes()
-
 }
