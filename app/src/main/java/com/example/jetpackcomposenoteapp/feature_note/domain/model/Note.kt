@@ -2,9 +2,8 @@ package com.example.jetpackcomposenoteapp.feature_note.domain.model
 
 data class Note(
     val title: String,
-    val content: String,
-    val timestamp: Long,
-    val color: Int,
+    val timestamp: String,
+    val isComplete: Boolean = false,
     val id:Int? = DEFOULT_Id
 ):java.io.Serializable {
     companion object{

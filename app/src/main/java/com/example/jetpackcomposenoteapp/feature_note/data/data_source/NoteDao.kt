@@ -10,10 +10,10 @@ interface NoteDao {
    suspend fun insertNote(noteEntity: NoteEntity)
 
     @Query("SELECT * FROM note WHERE id = :id")
-    fun getNoteById(id:Int):NoteEntity?
+    fun getNoteById(id:Int?):NoteEntity?
 
     @Query("SELECT * FROM note")
-    suspend fun getNotes():List<NoteEntity>
+     fun getNotes():Flow<List<NoteEntity>>
 
     @Update
    suspend fun editNote(noteEntity: NoteEntity)

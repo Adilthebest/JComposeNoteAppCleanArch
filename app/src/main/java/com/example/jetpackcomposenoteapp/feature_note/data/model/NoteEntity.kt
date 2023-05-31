@@ -7,12 +7,8 @@ import com.example.jetpackcomposenoteapp.ui.theme.*
 @Entity(tableName = "note")
 data class NoteEntity(
     val title: String,
-    val content: String,
-    val timestamp: Long,
-    val color: Int,
-    @PrimaryKey val id: Int? = null
-){
-    companion object{
-        val noteColors = listOf(RedOrange, LightGreen, Violet, BabyBlue, RedPink)
-    }
-}
+    val timestamp: String,
+    val isComplete: Boolean = false,
+    @PrimaryKey (autoGenerate = true)
+    val id: Int? = 0
+)
