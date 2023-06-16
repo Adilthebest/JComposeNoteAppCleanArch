@@ -21,36 +21,11 @@ import java.util.Locale
 
 @Composable
 fun NoteItem(
-    note: NoteEntity,
-    onChecked: (Boolean) -> Unit,
-    onDelete: (NoteEntity) -> Unit,
-    onNavigation: (NoteEntity) -> Unit,
+    note: Note,
 ) {
-
-    Card(
-        backgroundColor = MaterialTheme.colors. primaryVariant,
-        modifier = Modifier
-            .padding(16.dp)
-            .clickable { onNavigation(note) },
-        elevation = 0.dp,
-        shape = RoundedCornerShape(5.dp)
-    ) {
-        Spacer(modifier = Modifier.size(16.dp))
-        Row(modifier = Modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-Checkbox(checked = note.isComplete , onCheckedChange ={onChecked(it)} )
-            Column(modifier = Modifier.weight(1f)) {
-                Text(text = note.title, style = MaterialTheme.typography.subtitle2  )
-CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
-    Text(text = note.timestamp, style = MaterialTheme.typography.subtitle2  )
-
-}
-            }
-            IconButton(onClick= {onDelete(note)}){
-                Icon(imageVector = Icons.Default.Clear, contentDescription =null )
-            }
-        }
+    Column (modifier = Modifier.padding(horizontal = 16.dp)){
+        Text(text = note.title, fontSize = 24.sp)
+        Text(text = note.timestamp, fontSize = 24.sp)
     }
-
 }
+

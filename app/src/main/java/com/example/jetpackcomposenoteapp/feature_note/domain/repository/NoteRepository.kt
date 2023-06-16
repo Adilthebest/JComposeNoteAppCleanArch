@@ -8,8 +8,6 @@ import kotlinx.coroutines.flow.Flow
 interface NoteRepository {
      fun insertNote(note: Note): Flow<Resourse<Unit>>
 
-     fun getNoteById(id: Int): Note?
-
      fun getNotes(): Flow<Resourse<List<Note>>>
 
      fun editNote(note: Note): Flow<Resourse<Unit>>

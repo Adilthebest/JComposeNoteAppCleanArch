@@ -5,5 +5,5 @@ import com.example.jetpackcomposenoteapp.feature_note.domain.repository.NoteRepo
 class GetNotesId(
     private val repository: NoteRepository
 ) {
-    fun getNotesId(id:Int) = repository.getNoteById(id)
+//    fun getNotesId(id:Int) = repository.getNoteById(id)
 }

@@ -8,7 +8,6 @@ import com.example.jetpackcomposenoteapp.ui.theme.*
 data class NoteEntity(
     val title: String,
     val timestamp: String,
-    val isComplete: Boolean = false,
-    @PrimaryKey (autoGenerate = true)
-    val id: Int? = 0
+    @PrimaryKey(autoGenerate = true)
+    val id: Int
 )

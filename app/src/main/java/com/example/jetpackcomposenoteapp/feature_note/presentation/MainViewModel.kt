@@ -3,22 +3,27 @@ package com.example.jetpackcomposenoteapp.feature_note.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.jetpackcomposenoteapp.feature_note.data.model.NoteEntity
+import com.example.jetpackcomposenoteapp.feature_note.domain.model.Note
+import com.example.jetpackcomposenoteapp.feature_note.domain.use_case.CreateNoteUseCase
+import com.example.jetpackcomposenoteapp.feature_note.domain.use_case.DeleteNoteUseCase
+import com.example.jetpackcomposenoteapp.feature_note.domain.use_case.EditNoteUseCase
+import com.example.jetpackcomposenoteapp.feature_note.domain.use_case.GetAllNotesUseCase
+import com.example.jetpackcomposenoteapp.feature_note.domain.utils.UiState
 import com.example.jetpackcomposenoteapp.feature_note.presentation.base.BaseViewModel
-import com.example.jetpackcomposenoteapp.mvvm.Repository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 
 class MainViewModel(
-    val repository: Repository
-  /*  private val getAllNotesUseCase: GetAllNotesUseCase,
+    private val getAllNotesUseCase: GetAllNotesUseCase,
     private val deleteNoteUseCase: DeleteNoteUseCase,
     private val createNoteUseCase: CreateNoteUseCase,
-    private val editNoteUseCase: EditNoteUseCase,*/
-) : ViewModel() {
+    private val editNoteUseCase: EditNoteUseCase,
+) : BaseViewModel() {
 
-    /*private val _getAllNotesUseCase = MutableStateFlow<UiState<List<Note>>>(UiState.Empty())
+    private val _getAllNotesUseCase = MutableStateFlow<UiState<List<Note>>>(UiState.Empty())
     val getAllNoteState = _getAllNotesUseCase.asStateFlow()
 
     private val _deleteNoteUseCase = MutableStateFlow<UiState<Unit>>(UiState.Empty())
@@ -44,37 +49,5 @@ class MainViewModel(
     }
     fun createNote(note: Note) {
         createNoteUseCase(note).collectFlow(_createNoteState)
-    }*/
-    private val _state = MutableStateFlow (HomeViewState())
-    val state: StateFlow<HomeViewState>
-        get() = _state
-    val todolist = repository.getNoteData
-    val selected = MutableStateFlow(_state.value.selected)
-init {
-    viewModelScope.launch {
-        combine(todolist, selected) { todoList: List<NoteEntity>, selected: Boolean ->
-            HomeViewState(todoList, selected)
-        }.collect {
-            _state.value = it
-        }
     }
-}
-
-    fun update(note: NoteEntity) = viewModelScope.launch {
-        repository.update(note)
-    }
-
-    fun insert(note: NoteEntity) = viewModelScope.launch {
-        repository.insert(note)
-    }
-    fun delete(note: NoteEntity) = viewModelScope.launch {
-        repository.delete(note)
-    }
-    fun update(note: Int?) = viewModelScope.launch {
-        repository.getId(note)
-    }
-    data class HomeViewState(
-        val todolist: List<NoteEntity> = emptyList(),
-    val selected: Boolean = false,
-    )
 }

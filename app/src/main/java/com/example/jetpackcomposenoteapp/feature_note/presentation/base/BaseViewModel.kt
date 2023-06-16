@@ -20,7 +20,7 @@ abstract class BaseViewModel : ViewModel() {
                     }
                     is Resourse.Success -> {
                         if (result.data != null) {
-                            _state.value = UiState.Success(result.data!!)
+                            _state.value = UiState.Success(result.data)
                         }
                     }
                     is Resourse.Error -> {
